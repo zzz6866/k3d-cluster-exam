@@ -1,4 +1,4 @@
-# Terraform 클러스터 구성 테스트
+# Terraform 클러스터 구성 테스트 (작성중)
 ## 환경
 - K3D 환경 [Link](https://github.com/k3d-io/k3d)
 - SSH 원격 클러스터 구성
