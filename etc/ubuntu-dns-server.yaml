@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: dns-server
+  name: dns-server
+spec:
+  containers:
+  - image: ubuntu
+    name: dns-server
+    ports:
+    - containerPort: 53
+      protocol: TCP
+    - containerPort: 53
+      protocol: UDP
+    resources: {}
+    command:
+      - tail
+      - -f
+      - /dev/null
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: dns-server
+  name: dns-server
+spec:
+  ports:
+    - port: 53
+      name: udp
+      protocol: UDP
+      targetPort: 53
+    - port: 53
+      protocol: TCP
+      targetPort: 53
+      name: tcp
+  selector:
+    run: dns-server
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: dns-server
+  name: dns-server2
+spec:
+  ports:
+    - port: 53
+      name: udp
+      protocol: UDP
+      targetPort: 53
+    - port: 53
+      protocol: TCP
+      targetPort: 53
+      name: tcp
+  selector:
+    run: dns-server
+  type: ClusterIP
+
