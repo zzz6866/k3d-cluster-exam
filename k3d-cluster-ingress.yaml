@@ -26,3 +26,8 @@ spec:
                 name: nginx-service
                 port:
                   name: http
+# cert-manager을 사용하면서 dns 등록을 해놓으면 인증서(SSL) 갱신이 가능함, 무료 인증서(SSL)이고 Let's Encrypt 를 사용하고 만료 예정시 갱신도 되는듯함
+# 이곳에 tls 항목으로 yaml을 작성하면 적용 가능함, dns은 wildcard가 적용이 안되므로 서브도메인 기준으로 작성 필요
+# tls:
+#   - sub1.example.com
+#   - sub2.example.com
